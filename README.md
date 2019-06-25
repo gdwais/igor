@@ -28,8 +28,11 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`igor hello [FILE]`](#igor-hello-file)
-* [`igor help [COMMAND]`](#igor-help-command)
+- [igor](#igor)
+- [Usage](#Usage)
+- [Commands](#Commands)
+  - [`igor hello [FILE]`](#igor-hello-FILE)
+  - [`igor help [COMMAND]`](#igor-help-COMMAND)
 
 ## `igor hello [FILE]`
 
@@ -37,19 +40,19 @@ describe the command here
 
 ```
 USAGE
-  $ igor hello [FILE]
+  $ igor run [FILE]
 
 OPTIONS
-  -f, --force
+  -l, --list
   -h, --help       show CLI help
   -n, --name=name  name to print
 
 EXAMPLE
-  $ igor hello
-  hello world from ./src/hello.ts!
+  $ igor run script1
+    output from script1
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/gdwais/igor/blob/v0.0.0/src/commands/hello.ts)_
+_See code: [src/commands/run.ts](https://github.com/gdwais/igor/blob/v0.0.0/src/commands/run.ts)_
 
 ## `igor help [COMMAND]`
 
