@@ -1,7 +1,6 @@
 import {Command, flags} from '@oclif/command'
 import {log, alert, error} from '../utilities/logger';
 import * as scripts from "../scripts";
-const figlet = require('figlet');
 
 export default class Run extends Command {
   static description = `

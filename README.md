@@ -3,10 +3,9 @@ igor
 
 utility for random automation or streamlining of processes
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/igor.svg)](https://npmjs.org/package/igor)
-[![Downloads/week](https://img.shields.io/npm/dw/igor.svg)](https://npmjs.org/package/igor)
-[![License](https://img.shields.io/npm/l/igor.svg)](https://github.com/gdwais/igor/blob/master/package.json)
+# Future Plans
+
+Eventually I'd like to build this out so that it is a fullblown note - taking and messaging utility for me.
 
 <!-- toc -->
 * [Usage](#usage)
@@ -29,6 +28,7 @@ USAGE
 # Commands
 <!-- commands -->
 - [igor](#igor)
+- [Future Plans](#Future-Plans)
 - [Usage](#Usage)
 - [Commands](#Commands)
   - [`igor hello [FILE]`](#igor-hello-FILE)
