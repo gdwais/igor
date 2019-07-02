@@ -1,14 +1,15 @@
-import {log, alert, error} from './logger';
+
 import config from '../../config';
 import { Client } from 'pg';
 
 export default class DB {
-    client:any;
+    
     constructor() {
-        this.client = new Client(config.postgres);
+        
     }
 
     async createTable(tableName:string) {
+        const client:Client = new Client(config.postgres);
         const sql:string = `CREATE TABLE ${tableName} (
             id INT GENERATED ALWAYS AS IDENTITY,
             text TEXT NULL,
@@ -16,66 +17,71 @@ export default class DB {
             date_created  DATE NOT NULL DEFAULT CURRENT_DATE
         )`;
         
-        await this.client.connect()
-        const res = await this.client.query(sql);
-        this.client.end();
+        await client.connect()
+        const res = await client.query(sql);
+        client.end();
     }
 
     async insertInto(tableName:string, message:string) {
+        const client:Client = new Client(config.postgres);
         const sql:string = `INSERT INTO ${tableName} 
             (text, status) values 
             ('${message}', 'ACTIVE')`;
-        await this.client.connect();
-        const res = await this.client.query(sql);
-        this.client.end();
+        await client.connect();
+        const res = await client.query(sql);
+        client.end();
     }
 
     async setStatus(tableName:string, recordId: Int, status: Status) {
+        const client:Client = new Client(config.postgres);
         const sql:string = `
             UPDATE ${tableName}
             SET status = '${status}'
             WHERE id=${recordId}`;
-        await this.client.connect();
-        const res = await this.client.query(sql);
-        this.client.end();
+        await client.connect();
+        const res = await client.query(sql);
+        client.end();
     }
 
     async getAllItems(tableName:string) {
+        const client:Client = new Client(config.postgres);
         const sql:string = `
             SELECT * FROM ${tableName}`;
-        await this.client.connect();
-        const res = await this.client.query(sql);
-        this.client.end();
+        await client.connect();
+        const res = await client.query(sql);
+        client.end();
     }
 
-    async getItemsByStatus(tableName:string, status:status) {
+    async getItemsByStatus(tableName:string, status:Status) {
+        const client:Client = new Client(config.postgres);
         const sql:string = `
             SELECT * FROM ${tableName} WHERE status = '${status}'`;
-        await this.client.connect();
-        const res = await this.client.query(sql);
-        this.client.end();
+        await client.connect();
+        const res = await client.query(sql);
+        client.end();
     }
 
     async getLivingItems(tableName:string) {
+        const client:Client = new Client(config.postgres);
         const sql:string = `
             SELECT * FROM ${tableName} 
             WHERE status != 'INACTIVE' 
             ORDER BY date_created`;
-        await this.client.connect();
-        const res = await this.client.query(sql);
-        this.client.end();
+        await client.connect();
+        const res = await client.query(sql);
+        client.end();
     }
 
-    checkTableExists(tableName:string, callback) {
-        const sql:String = `
+    checkTableExists(tableName:string):boolean {
+        const client:Client = new Client(config.postgres);
+        const sql:string = `
             SELECT * FROM ${tableName}`;
-        this.client.connect();
-        this.client.query(sql, (err, response) => {
-            debugger;
-            
-
-        });
-        
+        client.connect();
+        const res = await client.query(sql);
+        debugger;
+        let tableExists:boolean = false;
+        client.end();
+        return tableExists;
     }
 
 }

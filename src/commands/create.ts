@@ -34,9 +34,9 @@ export default class Create extends Command {
             
             if (tableName) {
                 //check if table exists
-                debugger;
-                const DB:any = new db();
-                let tableExists:boolean = DB.checkTableExists(tableName);
+                
+                const DB:db = new db();
+                const tableExists:boolean = await DB.checkTableExists(tableName);
                 if (!tableExists) {
                     await DB.createTable(tableName);
                     log(`table ${tableName} created successfully`);
