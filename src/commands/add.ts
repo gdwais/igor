@@ -1,8 +1,6 @@
 import {Command, flags} from '@oclif/command'
 import {log, alert, error} from '../utilities/logger';
-import * as pg from 'pg';
-
-//TODO :: expand this so that you can specify a note to add to a table passed as an argument
+import DB from '../utilities/db';
 
 export default class Add extends Command {
     static description = `
@@ -16,6 +14,20 @@ export default class Add extends Command {
     static args = [{ name: 'table'}];
 
     async run() {
-        
+        const {args, flags} = this.parse(Add);
+        const db:DB = new DB();
+
+        if (args.table && flags.text) {
+            try {
+                log(`inserting ${flags.text} into ${args.table}`);
+                await db.insertInto(args.table, flags.text)
+                log(`insert completed successfully`);
+            } catch (err) {
+                error(err);
+            }
+        } else {
+            alert(`args or flags not configured properly`);
+        }
+
     }
 }

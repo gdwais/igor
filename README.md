@@ -3,6 +3,10 @@ igor
 
 utility for random automation, streamlining of processes, todo lists, metric tracking and whatever else I feel like adding ;)
 
+# Install & Setup
+install globally via npm 
+**npm install -g igor-cli**
+
 # Usage
 <!-- usage -->
 ```sh-session
