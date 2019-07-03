@@ -8,19 +8,27 @@ export default class Figlet extends Command {
     `;
 
     static examples = [
-        `$ igor figlet -s "some random text`
+        `$ igor figlet -t 'wolves in the throne room fucking rock'`,
+        `$ igor figlet -t 'big trouble in little china is my favorite movie`
     ];
 
     static flags = {
         help: flags.help({char: 'h'}),
-        string: flags.string({char: 's'})
+        text: flags.string({char: 't'})
     };
 
     static args = [];
 
     async run() {
-        const {args, flags} = this.parse(Figlet);
-
+        const {flags} = this.parse(Figlet);
+        figlet(flags.text, (err:any, data:any) => {
+            if (err) {
+                alert('Something went wrong...');
+                error(err);
+                return;
+            }
+            log(`\n ${data}`);
+        });
     }
 
 

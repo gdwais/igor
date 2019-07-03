@@ -1,5 +1,5 @@
 
-const config = {
+const config:any = {
     local: {
         postgres: 'postgres://localhost:5432/igor-db'
     },

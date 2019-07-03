@@ -10,6 +10,7 @@ export default class Add extends Command {
     `;
     static examples = [];
     static flags = {
+        text: flags.string({char: 't'}),
         help: flags.help({char: 'h'})
     }
     static args = [{ name: 'table'}];

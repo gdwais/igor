@@ -1,7 +1,7 @@
 
-import config from '../../config';
+import config from '../config';
 import { Client } from 'pg';
-
+import { log, error, alert } from '../utilities/logger';
 export default class DB {
     
     constructor() {
@@ -18,8 +18,7 @@ export default class DB {
         )`;
         
         await client.connect()
-        const res = await client.query(sql);
-        client.end();
+        return await ExecuteQuery(client, sql);
     }
 
     async insertInto(tableName:string, message:string) {
@@ -28,19 +27,17 @@ export default class DB {
             (text, status) values 
             ('${message}', 'ACTIVE')`;
         await client.connect();
-        const res = await client.query(sql);
-        client.end();
+        return await ExecuteQuery(client, sql);
     }
 
-    async setStatus(tableName:string, recordId: Int, status: Status) {
+    async setStatus(tableName:string, recordId: number, status: Status) {
         const client:Client = new Client(config.postgres);
         const sql:string = `
             UPDATE ${tableName}
             SET status = '${status}'
             WHERE id=${recordId}`;
         await client.connect();
-        const res = await client.query(sql);
-        client.end();
+        return await ExecuteQuery(client, sql);
     }
 
     async getAllItems(tableName:string) {
@@ -48,8 +45,7 @@ export default class DB {
         const sql:string = `
             SELECT * FROM ${tableName}`;
         await client.connect();
-        const res = await client.query(sql);
-        client.end();
+        return await ExecuteQuery(client, sql);
     }
 
     async getItemsByStatus(tableName:string, status:Status) {
@@ -57,8 +53,7 @@ export default class DB {
         const sql:string = `
             SELECT * FROM ${tableName} WHERE status = '${status}'`;
         await client.connect();
-        const res = await client.query(sql);
-        client.end();
+        return await ExecuteQuery(client, sql);
     }
 
     async getLivingItems(tableName:string) {
@@ -68,25 +63,51 @@ export default class DB {
             WHERE status != 'INACTIVE' 
             ORDER BY date_created`;
         await client.connect();
-        const res = await client.query(sql);
-        client.end();
+        return await ExecuteQuery(client, sql);
+        
     }
 
-    checkTableExists(tableName:string):boolean {
+    async checkTableExists(tableName:string) {
         const client:Client = new Client(config.postgres);
         const sql:string = `
             SELECT * FROM ${tableName}`;
         client.connect();
-        const res = await client.query(sql);
-        debugger;
+        
         let tableExists:boolean = false;
-        client.end();
+        try {
+            const res = await client.query(sql);
+            if (res) 
+                tableExists = true;
+            
+        } catch (err) {
+            error(err);
+        } finally {
+            client.end();
+        }
+        
         return tableExists;
     }
 
 }
 
-
+const ExecuteQuery = async (client:Client, sql:string) => {
+    let res:any;
+    let err:any;
+    try {
+        res = await client.query(sql);   
+    } catch (_err) {
+        err = _err;
+        error(err);
+    } finally {
+        client.end();
+    }
+    
+    if (res) {
+        return res;
+    } else {
+        return err;
+    }
+}
 export enum Status {
     Active = 'ACTIVE',
     Pending = 'PENDING',

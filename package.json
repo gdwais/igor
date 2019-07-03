@@ -59,7 +59,9 @@
   },
   "repository": "gdwais/igor",
   "scripts": {
+    "igor": "./bin/run",
     "reinstall": "rm -rf node_modules package-lock.json && time npm install",
+    "debug": "node inspect ./bin/run",
     "getversion": "node -e \"console.log(require('./package.json').version)\"",
     "setpatchversion": "npm version patch --no-git-tag-version --force",
     "setminorversion": "npm version minor --no-git-tag-version --force",
