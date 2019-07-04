@@ -27,7 +27,7 @@ export default class Figlet extends Command {
                 error(err);
                 return;
             }
-            log(`\n ${data}`);
+            log(`\n${data}`);
         });
     }
 

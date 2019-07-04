@@ -12,7 +12,7 @@
     "@oclif/config": "^1.13.0",
     "@oclif/plugin-help": "^2.2.0",
     "chalk": "^2.4.2",
-    "console.table": "^0.10.0",
+    "cli-table": "^0.3.1",
     "exceljs": "^1.12.2",
     "figlet": "^1.2.3",
     "node-pg-migrate": "^3.21.1",

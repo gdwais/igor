@@ -80,7 +80,7 @@ export default class DB {
                 tableExists = true;
             
         } catch (err) {
-            error(err);
+            alert(err);
         } finally {
             client.end();
         }
