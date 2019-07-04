@@ -1,7 +1,7 @@
 {
   "name": "igor-cli",
   "description": "utility for random automation or streamlining of processes",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Dalton Wais @gdwais",
   "bin": {
     "igor": "./bin/run"
@@ -11,10 +11,13 @@
     "@oclif/command": "^1.5.15",
     "@oclif/config": "^1.13.0",
     "@oclif/plugin-help": "^2.2.0",
+    "ascii-art": "^1.5.1",
+    "canvas": "^2.5.0",
     "chalk": "^2.4.2",
     "cli-table": "^0.3.1",
     "exceljs": "^1.12.2",
     "figlet": "^1.2.3",
+    "log-symbols": "^3.0.0",
     "node-pg-migrate": "^3.21.1",
     "pg": "^7.11.0",
     "terminal-kit": "^1.28.1",

@@ -37,7 +37,7 @@ export default class Get extends Command {
       for(let rec of records) {
         table.push(Object.values(rec));
       }
-      let stringifyTable:string = `\n${table.toString()}`;
+      let stringifyTable:string = `${table.toString()}`;
       log(stringifyTable);
     } else {
         alert('table not found');
