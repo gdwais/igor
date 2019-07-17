@@ -2,8 +2,6 @@ import {Command, flags} from '@oclif/command'
 import {log, alert, error} from '../utilities/logger';
 import db from '../utilities/db';
 
-// TODO :: expand this so that you can create a new table with a preset number
-// of columns OR be able to choose from a list of presets
 
 export default class Create extends Command {
     static description = `
