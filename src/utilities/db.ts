@@ -66,7 +66,16 @@ export default class DB {
         return await ExecuteQuery(client, sql);
         
     }
-
+    async getAllTableNames() {
+        const client:Client = new Client(config.postgres);
+        const sql:string = `
+            SELECT tablename AS table 
+            FROM pg_tables
+            WHERE schemaname = 'public'`;
+        await client.connect();
+        return await ExecuteQuery(client, sql);
+    }
+    
     async checkTableExists(tableName:string) {
         const client:Client = new Client(config.postgres);
         const sql:string = `
